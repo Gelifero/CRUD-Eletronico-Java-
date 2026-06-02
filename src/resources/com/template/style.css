@@ -1,0 +1,88 @@
+/* Cor de fundo da tela inteira e fonte padrão */
+.root {
+    -fx-background-color: #F4F6F9;
+    -fx-font-family: "Segoe UI", "Open Sans", Helvetica, sans-serif;
+}
+
+/* Estilo do Título Principal */
+.title {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2C3E50;
+}
+
+/* Estilo das Labels em cima dos TextFields */
+.form-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #596A7B;
+}
+
+/* Campos de texto modernos (com bordas arredondadas) */
+.text-field {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D1D9E6;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-padding: 10px 12px;
+    -fx-font-size: 14px;
+}
+
+/* Efeito ao clicar no campo de texto */
+.text-field:focused {
+    -fx-border-color: #3498DB;
+    -fx-effect: dropshadow(three-pass-box, rgba(52,152,219,0.3), 5, 0, 0, 0);
+}
+
+/* ESTILO PADRÃO DE BOTÕES */
+.button {
+    -fx-padding: 10px 24px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6px;
+    -fx-cursor: hand;
+}
+
+/* Botão Salvar (Azul) */
+.btn-primary {
+    -fx-background-color: #3498DB;
+    -fx-text-fill: white;
+}
+.btn-primary:hover {
+    -fx-background-color: #2980B9;
+}
+
+/* Botão Excluir (Vermelho) */
+.btn-danger {
+    -fx-background-color: #E74C3C;
+    -fx-text-fill: white;
+}
+.btn-danger:hover {
+    -fx-background-color: #C0392B;
+}
+
+/* Botões Editar/Atualizar (Cinza Escuro) */
+.btn-secondary {
+    -fx-background-color: #7F8C8D;
+    -fx-text-fill: white;
+}
+.btn-secondary:hover {
+    -fx-background-color: #636E72;
+}
+
+/* Suavizando a Tabela */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: #D1D9E6;
+    -fx-border-radius: 6px;
+}
+.table-view .column-header-background {
+    -fx-background-color: #E4E9F2;
+}
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+.table-view .column-header .label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #2C3E50;
+}
