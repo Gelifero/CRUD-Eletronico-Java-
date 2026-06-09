@@ -9,29 +9,30 @@ import java.util.logging.Logger;
 import java.sql.ResultSet;
 
 
+
 public class EletronicoDAO {
-    public ArrayList<EletronicoDTO> listarEletronicos()
-    {
+
+    private static final Logger logger = Logger.getLogger(EletronicoDAO.class.getName());
+
+    public ArrayList<EletronicoDTO> listarEletronicos() {
         ArrayList<EletronicoDTO> lista = new ArrayList<>();
         String sql = "select * from eletronicos";
+
         try (Connection conexao = new Conexao().conectaBD();
              PreparedStatement stmt = conexao.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery())//guarda o resultado da query
-        // try-with-resources garante o fechamento automático da conexão e recursos
-        {
-            //Percorre e armazena todas as linhas retornadas pela consulta SQL
-            while(rs.next())
-            {
-                System.out.println(
-                        "#" + rs.getInt("id") +
-                                " | Nome: " + rs.getString("nome_eletronico") +
-                                " | Modelo: " + rs.getString("modelo") +
-                                " | Cor: " + rs.getString("cor")
-                );
+             ResultSet rs = stmt.executeQuery()) {
+
+            // Percorre as linhas retornadas pelo banco
+            while(rs.next()) {
+                EletronicoDTO obj = new EletronicoDTO();
+                obj.setId(rs.getInt("id"));
+                obj.setNomeEletronico(rs.getString("nome_eletronico"));
+                obj.setModelo(rs.getString("modelo"));
+                obj.setCor(rs.getString("cor"));
+                lista.add(obj);
             }
-        } catch (SQLException e)
-        {
-            System.out.println("Erro ao listar eletronico" + e.getMessage());
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Erro ao listar os eletronicos");
         }
 
         return lista;
@@ -48,10 +49,9 @@ public class EletronicoDAO {
             stmt.setString(2, eletronico.getModelo());
             stmt.setString(3, eletronico.getCor());
             stmt.executeUpdate();
-            System.out.println("Eletronico cadastrado com sucesso");
         } catch (SQLException e)
         {
-            System.out.println("Erro ao cadastrar eletronico" + e.getMessage());
+            logger.log(Level.SEVERE, "Erro ao cadastrar usuario");
         }
     }
 
@@ -68,13 +68,13 @@ public class EletronicoDAO {
             int linhasAfetadas = stmt.executeUpdate();
 
             if (linhasAfetadas > 0) {
-                System.out.println("\n Eletrônico atualizado com sucesso!");
+                logger.log(Level.SEVERE, "Eletronico atualizado com sucesso");
             } else {
-                System.out.println("\n Nenhum registro encontrado.");
+                logger.log(Level.SEVERE, "Nenhum eletronico encontrado");
             }
         } catch (SQLException e)
         {
-            System.out.println("Erro ao atualizar o eletronico" + e.getMessage());
+            logger.log(Level.SEVERE, "Erro ao atualizar eletronico");
         }
     }
     public void excluirEletronico(int id)
@@ -87,13 +87,13 @@ public class EletronicoDAO {
             int linhasAfetadas = stmt.executeUpdate();
 
             if (linhasAfetadas > 0) {
-                System.out.println("\n Eletronico excluido com sucesso!");
+                logger.log(Level.SEVERE, "Eletronico excluido com sucesso");
             } else {
-                System.out.println("\n Nenhum registro encontrado para exclusao.");
+                logger.log(Level.SEVERE, "Nenhum eletronico encontrado");
             }
         } catch (SQLException e)
         {
-            System.out.println("Erro ao excluir eletronico" + e.getMessage());
+            logger.log(Level.SEVERE, "Erro ao excluir eletronico");
         }
     }
 }

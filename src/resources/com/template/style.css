@@ -1,88 +1,114 @@
-/* Cor de fundo da tela inteira e fonte padrão */
+/* 1. Estilo geral do fundo e fonte */
 .root {
-    -fx-background-color: #F4F6F9;
-    -fx-font-family: "Segoe UI", "Open Sans", Helvetica, sans-serif;
+    -fx-background-color: #f4f6f8;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
-/* Estilo do Título Principal */
+/* 2. Título principal da tela */
 .title {
     -fx-font-size: 26px;
     -fx-font-weight: bold;
-    -fx-text-fill: #2C3E50;
+    -fx-text-fill: #2c3e50;
 }
 
-/* Estilo das Labels em cima dos TextFields */
+/* 3. Textos em cima dos campos (Labels) */
 .form-label {
     -fx-font-size: 14px;
+    -fx-text-fill: #34495e;
     -fx-font-weight: bold;
-    -fx-text-fill: #596A7B;
 }
 
-/* Campos de texto modernos (com bordas arredondadas) */
-.text-field {
-    -fx-background-color: #FFFFFF;
-    -fx-border-color: #D1D9E6;
-    -fx-border-radius: 6px;
-    -fx-background-radius: 6px;
-    -fx-padding: 10px 12px;
+/* 4. Campos de Texto e ComboBox */
+.text-field, .combo-box {
     -fx-font-size: 14px;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: #bdc3c7;
+    -fx-background-color: #ffffff;
+    -fx-padding: 5;
 }
 
-/* Efeito ao clicar no campo de texto */
-.text-field:focused {
-    -fx-border-color: #3498DB;
-    -fx-effect: dropshadow(three-pass-box, rgba(52,152,219,0.3), 5, 0, 0, 0);
+/* Efeito azul quando o usuário clica para digitar no campo */
+.text-field:focused, .combo-box:focused {
+    -fx-border-color: #3498db;
+    -fx-border-width: 2px;
 }
 
-/* ESTILO PADRÃO DE BOTÕES */
+/* 5. Estilo Base para todos os Botões */
 .button {
-    -fx-padding: 10px 24px;
     -fx-font-size: 14px;
+    -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-background-radius: 6px;
+    -fx-background-radius: 5;
     -fx-cursor: hand;
+    -fx-padding: 8 15 8 15;
 }
 
-/* Botão Salvar (Azul) */
+/* Botão Salvar (Primário - Verde) */
 .btn-primary {
-    -fx-background-color: #3498DB;
-    -fx-text-fill: white;
+    -fx-background-color: #27ae60;
 }
 .btn-primary:hover {
-    -fx-background-color: #2980B9;
+    -fx-background-color: #2ecc71;
 }
 
-/* Botão Excluir (Vermelho) */
-.btn-danger {
-    -fx-background-color: #E74C3C;
-    -fx-text-fill: white;
-}
-.btn-danger:hover {
-    -fx-background-color: #C0392B;
-}
-
-/* Botões Editar/Atualizar (Cinza Escuro) */
+/* Botões Atualizar e Limpar (Secundários - Azul escuro) */
 .btn-secondary {
-    -fx-background-color: #7F8C8D;
-    -fx-text-fill: white;
+    -fx-background-color: #2980b9;
 }
 .btn-secondary:hover {
-    -fx-background-color: #636E72;
+    -fx-background-color: #3498db;
 }
 
-/* Suavizando a Tabela */
+/* Botão Excluir (Perigo - Vermelho) */
+.btn-danger {
+    -fx-background-color: #c0392b;
+}
+.btn-danger:hover {
+    -fx-background-color: #e74c3c;
+}
+
+/* Visual para botões bloqueados (A Melhoria de UX!) */
+.button:disabled {
+    -fx-background-color: #bdc3c7;
+    -fx-text-fill: #7f8c8d;
+    -fx-cursor: default;
+}
+
+/* 6. Tabela */
 .table-view {
-    -fx-background-color: transparent;
-    -fx-border-color: #D1D9E6;
-    -fx-border-radius: 6px;
+    -fx-base: #ffffff;
+    -fx-control-inner-background: #ffffff;
+    -fx-background-color: #ffffff;
+    -fx-table-cell-border-color: #ecf0f1;
+    -fx-padding: 5;
 }
-.table-view .column-header-background {
-    -fx-background-color: #E4E9F2;
-}
+
+/* Cabeçalho da tabela */
 .table-view .column-header {
-    -fx-background-color: transparent;
-}
-.table-view .column-header .label {
+    -fx-background-color: #ecf0f1;
+    -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-text-fill: #2C3E50;
+}
+
+/* Cor da linha quando clicada */
+.table-row-cell:selected {
+    -fx-background-color: #3498db;
+    -fx-text-background-color: white;
+}
+
+.titled-pane {
+    -fx-text-fill: #2c3e50;
+    -fx-font-weight: bold;
+}
+
+.titled-pane > .title {
+    -fx-background-color: #ecf0f1;
+    -fx-background-insets: 0;
+    -fx-padding: 10;
+}
+
+.titled-pane > .content {
+    -fx-background-color: white;
+    -fx-border-color: #dcdde1;
 }
