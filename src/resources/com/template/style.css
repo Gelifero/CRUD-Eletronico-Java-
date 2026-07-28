@@ -112,3 +112,21 @@
     -fx-background-color: white;
     -fx-border-color: #dcdde1;
 }
+
+/* Efeito de Material Design (Sombra Flutuante) nos Painéis */
+.titled-pane {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0, 0, 4);
+    -fx-background-color: transparent;
+}
+
+/* Deixa as bordas dos painéis arredondadas e modernas */
+.titled-pane > .title {
+    -fx-background-radius: 8 8 0 0;
+    -fx-padding: 8 15 8 15;
+}
+
+.titled-pane > .content {
+    -fx-background-radius: 0 0 8 8;
+    -fx-background-color: #ffffff;
+    -fx-border-color: transparent;
+}

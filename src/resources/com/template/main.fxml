@@ -9,11 +9,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="650.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.template.MainController">
+<AnchorPane prefHeight="650.0" prefWidth="1100.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.template.controller.MainController">
     <children>
-        <VBox prefHeight="650.0" prefWidth="1000.0" spacing="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox prefHeight="650.0" prefWidth="1100.0" spacing="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <padding>
                 <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
             </padding>
@@ -38,10 +39,15 @@
                                 <Label layoutX="514.0" layoutY="14.0" styleClass="form-label" text="Cor" />
                                 <ComboBox fx:id="cbxCor" layoutX="514.0" layoutY="34.0" prefWidth="120.0" />
 
-                                <Button fx:id="btnSalvar" layoutX="660.0" layoutY="34.0" mnemonicParsing="false" onAction="#btnSalvarAction" styleClass="btn-primary" text="Salvar" />
-                                <Button fx:id="btnAtualizar" disable="true" layoutX="730.0" layoutY="34.0" mnemonicParsing="false" onAction="#btnAtualizarAction" styleClass="btn-secondary" text="Atualizar" />
-                                <Button fx:id="btnExcluir" disable="true" layoutX="810.0" layoutY="34.0" mnemonicParsing="false" onAction="#btnExcluirAction" styleClass="btn-danger" text="Excluir" />
-                                <Button fx:id="btnLimpar" layoutX="880.0" layoutY="34.0" mnemonicParsing="false" onAction="#btnLimparAction" styleClass="btn-secondary" text="Limpar" />
+                                <HBox layoutX="650.0" layoutY="34.0" spacing="10.0">
+                                    <children>
+                                        <Button fx:id="btnSalvar" mnemonicParsing="false" onAction="#btnSalvarAction" prefWidth="105.0" styleClass="btn-primary" text="💾 Salvar" />
+                                        <Button fx:id="btnAtualizar" disable="true" mnemonicParsing="false" onAction="#btnAtualizarAction" prefWidth="105.0" styleClass="btn-secondary" text="🔄 Atualizar" />
+                                        <Button fx:id="btnExcluir" disable="true" mnemonicParsing="false" onAction="#btnExcluirAction" prefWidth="105.0" styleClass="btn-danger" text="🗑️ Excluir" />
+                                        <Button fx:id="btnLimpar" mnemonicParsing="false" onAction="#btnLimparAction" prefWidth="105.0" styleClass="btn-secondary" text="🧹 Limpar" />
+                                    </children>
+                                </HBox>
+
                             </children>
                         </AnchorPane>
                     </content>
