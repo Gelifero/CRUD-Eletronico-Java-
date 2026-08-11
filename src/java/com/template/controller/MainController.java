@@ -1,5 +1,6 @@
 package com.template.controller;
 
+import com.template.controller.service.Layout;
 import com.template.model.EletronicoDAO;
 import com.template.model.EletronicoDTO;
 import com.template.util.DialogUtil;
@@ -10,6 +11,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
+
+import com.template.validator.EletronicoValidator;
+
 
 public class MainController {
 
@@ -30,27 +34,15 @@ public class MainController {
     @FXML private ComboBox<String> cbxCor;
     @FXML private Label lblMensagem;
 
-    // Mantivemos este método para mensagens sutis e rápidas na interface (UX)
-    private void exibirMensagem(String texto, boolean sucesso) {
-        lblMensagem.setText(texto);
-        if (sucesso) {
-            lblMensagem.setStyle("-fx-text-fill: #27ae60; -fx-font-weight: bold;");
-        } else {
-            lblMensagem.setStyle("-fx-text-fill: #c0392b; -fx-font-weight: bold;");
-        }
-    }
-
-    private boolean camposValidos() {
-        if (txtNome.getText().isEmpty() || txtModelo.getText().isEmpty() || cbxCor.getValue() == null) {
-            DialogUtil.showWarning("Atenção", "Preencha todos os campos obrigatórios!");
-            return false;
-        }
-        return true;
-    }
-
     @FXML
     private void btnSalvarAction(ActionEvent event) {
-        if (!camposValidos()) return;
+        boolean dadosValidos = EletronicoValidator.validarCamposObrigatorios(
+                txtNome.getText(),
+                txtModelo.getText(),
+                cbxCor.getValue()
+        );
+
+        if (!dadosValidos) return;
 
         try {
             EletronicoDTO obj = new EletronicoDTO();
@@ -64,7 +56,9 @@ public class MainController {
             DialogUtil.showInfo("Eletrônico cadastrado com sucesso!");
             btnLimparAction(null);
             carregarEletronicos();
-            exibirMensagem("Pronto para um novo cadastro.", true);
+
+            // Chamando a classe Layout passando a Label
+            Layout.exibirMensagem(lblMensagem, "Pronto para um novo cadastro.", true);
 
         } catch (Exception e) {
             DialogUtil.showError("Erro ao Salvar", "Ocorreu um erro no banco de dados.\nDetalhes: " + e.getMessage());
@@ -73,7 +67,15 @@ public class MainController {
 
     @FXML
     private void btnAtualizarAction(ActionEvent event) {
-        if (txtId.getText().isEmpty() || !camposValidos()) return;
+        if (txtId.getText().isEmpty()) return;
+
+        boolean dadosValidos = EletronicoValidator.validarCamposObrigatorios(
+                txtNome.getText(),
+                txtModelo.getText(),
+                cbxCor.getValue()
+        );
+
+        if (!dadosValidos) return;
 
         try {
             EletronicoDTO obj = new EletronicoDTO();
@@ -116,7 +118,8 @@ public class MainController {
                     DialogUtil.showError("Erro ao Excluir", "Houve um problema ao excluir o item.\nDetalhes: " + e.getMessage());
                 }
             } else {
-                exibirMensagem("Exclusão cancelada pelo usuário.", false);
+                // Chamando a classe Layout passando a Label
+                Layout.exibirMensagem(lblMensagem, "Exclusão cancelada pelo usuário.", false);
             }
         }
     }
@@ -124,26 +127,12 @@ public class MainController {
     @FXML
     private void carregarCampos(MouseEvent event) {
         EletronicoDTO selecionado = tblEletronico.getSelectionModel().getSelectedItem();
-        if (selecionado != null) {
-            txtId.setText(String.valueOf(selecionado.getId()));
-            txtNome.setText(selecionado.getNomeEletronico());
-            txtModelo.setText(selecionado.getModelo());
-            cbxCor.setValue(selecionado.getCor());
-            exibirMensagem("Modo de Edição ativado.", true);
-        }
+        Layout.carregarCampos(selecionado, txtId, txtNome, txtModelo, cbxCor, lblMensagem);
     }
 
     @FXML
     private void btnLimparAction(ActionEvent event) {
-        txtId.clear();
-        txtNome.clear();
-        txtModelo.clear();
-        cbxCor.getSelectionModel().clearSelection();
-        tblEletronico.getSelectionModel().clearSelection();
-
-        if (lblMensagem.getText().equals("Modo de Edição ativado.")) {
-            lblMensagem.setText("");
-        }
+        Layout.limparCampos(txtId, txtNome, txtModelo, cbxCor, tblEletronico, lblMensagem);
     }
 
     @FXML
